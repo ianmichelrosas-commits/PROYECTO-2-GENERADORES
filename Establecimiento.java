@@ -1,7 +1,7 @@
-public class Establecimiento extends Lugar {
+public class Establecimiento extends Ciudad {
     
     public Establecimiento(int medidor){
-        super(medidor);
+        super(medidor);//Determinar el costo del Voltaje
     }
 
 }

@@ -1,7 +1,7 @@
-public class Corporativo extends Lugar{
+public class Corporativo extends Ciudad{
     
     public Corporativo(int medidor){
-        super(medidor);
+        super(medidor);//Determinar el costo de Voltaje
     }
 
 }

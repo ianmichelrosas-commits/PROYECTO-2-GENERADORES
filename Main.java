@@ -1,4 +1,6 @@
 
+import java.util.Scanner;
+
 import javax.swing.JOptionPane;
 
 public class Main {
@@ -7,7 +9,7 @@ public class Main {
     static boolean ciudadEncendida = false;
     static boolean dispositivosEncendidos = false;
     static String generadorActivo = "Ninguno";
-
+    Scanner teclado = new Scanner(System.in);
     public static void main(String[] args) {
 
         int opcion = 0;
@@ -78,7 +80,32 @@ public class Main {
 
         } while (opcion != 4);
     }
+//Metodo propuesto para la craciòn de la ciudad
+    public void formarCiudad(){
+        Ciudad[] ciudad = new Ciudad[10];
+        int lugares = 0;
+        int opcion;
+        do{
+          String menu[]= {"
+          Formando Ciudad
+          1. Vivienda
+          2. Establecimiento
+          3. Corporativo
+          
+          Seleccione un lugar para agregar a la ciudad
+          "};
 
+        }while(opcion != 4);
+
+    }
+    
+    
+    
+    
+    
+    
+    
+    
     // OPCION 1: PRENDER CIUDAD
     public static void prenderCiudad() {
 

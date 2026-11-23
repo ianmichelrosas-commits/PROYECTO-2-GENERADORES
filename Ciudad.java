@@ -1,16 +1,27 @@
-public class Ciudad extends Lugar {
+public class Ciudad {
 
-    private int clima;
+    protected int medidor;
+    protected int calor;
+    protected int viento;
+    protected int lluvia;
 
-    public Ciudad(int medidor, int clima){
-        super(medidor);
-        this.clima = clima;
+    Ciudad(int medidor){
+        this.medidor = medidor;
+        this.calor = 0;
+        this.viento = 1;
+        this.lluvia = 2;
     }
 
-    //Aqui ira el metodo que llame al metodo del padre para definir el clima
-    
-    
-    public int getClima(){
+    public double definirClima(){
+        int N = 2;
+        int M = 0;
+        double clima = Math.floor(Math.random()*(N-M+1)+M);
+        if(clima == calor){
+            System.out.println("El clima predominante es el calor");
+        }else if(clima == viento){
+            System.out.println("EL clima predominante es el viento");
+        }else System.out.println("El clima predominante es la lluvia");
+
         return clima;
     }
 
