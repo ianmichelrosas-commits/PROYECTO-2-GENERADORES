@@ -45,6 +45,7 @@ public class Main {
                 switch (opcion) {
 
                     case 1:
+                        formarCiudad();
                         prenderCiudad();
                         break;
 
@@ -81,28 +82,58 @@ public class Main {
         } while (opcion != 4);
     }
 //Metodo propuesto para la craciòn de la ciudad
-    public void formarCiudad(){
-        Ciudad[] ciudad = new Ciudad[10];
+    public static  void formarCiudad(){
+        Ciudad[] ciudad = new Ciudad[25];
         int lugares = 0;
         int opcion;
         do{
-          String menu[]= {"
+          String menu[]= {"""
           Formando Ciudad
           1. Vivienda
           2. Establecimiento
           3. Corporativo
-          
-          Seleccione un lugar para agregar a la ciudad
-          "};
+          4. Salir
 
+          Seleccione un lugar para agregar a la ciudad
+          """};
+          String seleccion =  JOptionPane.showInputDialog(
+                    null,
+                    menu,
+                    "Menu Lugar",
+                    JOptionPane.QUESTION_MESSAGE
+            );
+           opcion = Integer.parseInt(seleccion);
+           switch (opcion) {
+            case 1:
+                Vivienda vivienda = new Vivienda();
+                System.out.println("Se creo la vivienda");
+                vivienda.definirClima();
+                ciudad[lugares] = vivienda;
+                lugares++;
+                break;
+            case 2:
+                Establecimiento establecimiento = new Establecimiento();
+                establecimiento.definirClima();
+                ciudad[lugares] = establecimiento;
+                lugares++;
+                break;
+            
+            case 3:
+                Corporativo corporativo = new Corporativo();
+                corporativo.definirClima();
+                ciudad[lugares] = corporativo;
+                lugares++;
+                break;
+
+            case 4:
+                System.out.println("Saliendo");
+                break;
+            default: System.out.println("Opcion Invalida");
+                break;
+           }
         }while(opcion != 4);
 
     }
-    
-    
-    
-    
-    
     
     
     
