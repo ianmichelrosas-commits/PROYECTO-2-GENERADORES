@@ -1,3 +1,4 @@
+
 public class Ciudad {
 
     protected int medidor;
@@ -5,17 +6,20 @@ public class Ciudad {
     protected int viento;
     protected int lluvia;
 
-    Ciudad(int medidor){
+    Ciudad(int medidor) {
         this.medidor = medidor;
         this.calor = 0;
         this.viento = 1;
         this.lluvia = 2;
     }
 
-    public void definirClima(){
-       System.out.println("Se presenta clima en el lugar..");
-        
+    public int getMedidor() {
+        return medidor;
     }
 
-
+    public void definirClima() {
+        System.out.println(
+            "Se presenta clima en el lugar.."
+        );
+    }
 }
