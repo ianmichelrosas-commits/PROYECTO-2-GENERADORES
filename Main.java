@@ -8,11 +8,11 @@ public class Main {
     static boolean dispositivosEncendidos = true;
     static Generador generadorActivo = null;
     static int energiaDisponible = 0;
-    static Regulador regulador = new Regulador();
+    static Regulador regulador = new Transformador();
 
     // Polimorfismo: las tres clases hijas se guardan como Generador.
     static Generador[] generadores = {
-        new Solar(), new Eolico(), new Hidroelectrico()
+            new Solar(), new Eolico(), new Hidroelectrico()
     };
 
     public static void main(String[] args) {
@@ -126,9 +126,14 @@ public class Main {
 
     public static void prenderCiudad() {
         if (generadorActivo != null && generadorActivo.estaEncendido()) {
-            JOptionPane.showMessageDialog(null,
-                    "Ya hay un generador encendido. Revisa el estado en opcion 2.");
-            return;
+            int respuesta =JOptionPane.showConfirmDialog(null, "Ya está encendido el generador" + generadorActivo.getNombre() + " \n¿Deseas apagarlo para seleccionar otro?", "Cambiar generador",JOptionPane.YES_NO_OPTION);
+            if(respuesta!=JOptionPane.YES_OPTION) {
+                return;
+            }
+            generadorActivo.apagar();
+            generadorActivo=null;
+            energiaDisponible=0;
+            actualizarEstado();
         }
 
         // FOR: construir las opciones usando un arreglo.
@@ -151,9 +156,11 @@ public class Main {
         }
         String entrada = JOptionPane.showInputDialog(null,
                 "Disponibilidad del recurso (0 a 100):\n"
-                + "Solar = luz; Eolico = viento; Hidroelectrico = agua");
+                        + "Solar = luz; Eolico = viento; Hidroelectrico = agua");
         if (entrada == null) {
             generadorActivo = null;
+            energiaDisponible=0;
+            actualizarEstado();
             return;
         }
         try {
@@ -169,7 +176,7 @@ public class Main {
             actualizarEstado();
             JOptionPane.showMessageDialog(null,
                     generadorActivo.mostrarDatos(true) + "\n"
-                    + regulador.revisar(energiaDisponible, calcularConsumo(), true));
+                            + regulador.revisar(energiaDisponible, calcularConsumo(), true));
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null,
                     "Error: escribe un numero entero entre 0 y 100.");
@@ -191,11 +198,11 @@ public class Main {
             String estado = ciudadEncendida ? "Encendida" : "Sin suministro suficiente";
             JOptionPane.showMessageDialog(null,
                     "ESTADO DE LA CIUDAD\n"
-                    + "Lugares: " + lugares + "\n"
-                    + "Ciudad: " + estado + "\n"
-                    + "Dispositivos no esenciales: "
-                    + (dispositivosEncendidos ? "Encendidos" : "Apagados") + "\n"
-                    + regulador.revisar(energiaDisponible, calcularConsumo(), true));
+                            + "Lugares: " + lugares + "\n"
+                            + "Ciudad: " + estado + "\n"
+                            + "Dispositivos no esenciales: "
+                            + (dispositivosEncendidos ? "Encendidos" : "Apagados") + "\n"
+                            + regulador.revisar(energiaDisponible, calcularConsumo(), true));
         }
     }
 
@@ -211,7 +218,7 @@ public class Main {
             actualizarEstado();
             JOptionPane.showMessageDialog(null,
                     "Se apagaron dispositivos no esenciales.\n"
-                    + regulador.revisar(energiaDisponible, calcularConsumo(), true));
+                            + regulador.revisar(energiaDisponible, calcularConsumo(), true));
         }
     }
 }
